@@ -1,76 +1,65 @@
 <?php
 require_once __DIR__ . '/db.php';
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$currentUserId = isset($_SESSION['user_id']) ? (int) $_SESSION['user_id'] : 0;
+
 // fallback demo user; name may be overridden by session in home.php
 $demoUser = [
     'name' => 'Person',
     'greeting' => 'Good day',
 ];
 
-// load courses from the database table `course`
+// load courses from the database table `course` for the current user
 $courses = [];
 
-try {
-    $stmt = $pdo->query('SELECT course_id, course_name, course_desc FROM course ORDER BY course_name');
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $courses[] = [
-            'id' => (int) $row['course_id'],
-            'name' => $row['course_name'],
-            'description' => $row['course_desc'],
-        ];
+if ($currentUserId > 0) {
+    try {
+        $stmt = $pdo->prepare(
+            'SELECT course_id, course_name, course_desc FROM course WHERE user_id = :user_id ORDER BY course_name'
+        );
+        $stmt->execute([':user_id' => $currentUserId]);
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $courses[] = [
+                'id' => (int) $row['course_id'],
+                'name' => $row['course_name'],
+                'description' => $row['course_desc'],
+            ];
+        }
+    } catch (PDOException $e) {
+        // if the query fails, keep $courses as an empty array
     }
-} catch (PDOException $e) {
-    // if the query fails, keep $courses as an empty array
 }
 
-//sample data for tasks only
-$tasks = [
-    [
-        'id' => 101,
-        'name' => 'Create a Profile Page',
-        'course_id' => 1,
-        'deadline' => '2026-03-14',
-        'priority' => 'High',
-        'status' => 'Completed',
-        'description' => 'Build a simple personal webpage using HTML and CSS that looks good on both a phone and a laptop.',
-    ],
-    [
-        'id' => 102,
-        'name' => 'Fetch Data',
-        'course_id' => 1,
-        'deadline' => '2026-03-15',
-        'priority' => 'Medium',
-        'status' => 'Not Completed',
-        'description' => 'Write a small script that pulls a random quote or weather update from a public website and displays it on your page.',
-    ],
-    [
-        'id' => 103,
-        'name' => 'Write a User Story',
-        'course_id' => 2,
-        'deadline' => '2026-03-16',
-        'priority' => 'High',
-        'status' => 'Completed',
-        'description' => 'Pick an app you use (like Spotify) and write three "As a user, I want to..." sentences for its features.',
-    ],
-    [
-        'id' => 104,
-        'name' => 'Make a Chart',
-        'course_id' => 3,
-        'deadline' => '2026-03-13',
-        'priority' => 'Low',
-        'status' => 'Not Completed',
-        'description' => 'Turn a small table of data into a clear bar graph or pie chart to show a specific trend.',
-    ],
-    [
-        'id' => 105,
-        'name' => 'Spot the difference',
-        'course_id' => 4,
-        'deadline' => '2026-03-13',
-        'priority' => 'Medium',
-        'status' => 'Not Completed',
-        'description' => 'Compare how a "Loop" looks in two different languages and list two things that are different about the syntax.',
-    ],
-];
+// load tasks from the database table `task` for the current user
+$tasks = [];
+
+if ($currentUserId > 0) {
+    try {
+        $stmt = $pdo->prepare(
+            'SELECT task_id, task_name, task_desc, task_due, task_priority, task_status, course_id
+             FROM task
+             WHERE user_id = :user_id'
+        );
+        $stmt->execute([':user_id' => $currentUserId]);
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $tasks[] = [
+                'id' => (int) $row['task_id'],
+                'name' => $row['task_name'],
+                'course_id' => (int) $row['course_id'],
+                'deadline' => $row['task_due'],
+                'priority' => $row['task_priority'],
+                'status' => $row['task_status'],
+                'description' => $row['task_desc'],
+            ];
+        }
+    } catch (PDOException $e) {
+        // if the query fails, keep $tasks as an empty array
+    }
+}
 
 function find_course($courses, $id) {
     foreach ($courses as $course) {

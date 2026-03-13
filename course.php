@@ -30,7 +30,9 @@ render_sidebar_toggle();
       <?php endforeach; ?>
     </div>
     <div class="panel-actions">
-      <button class="link-button"><span>+</span> New Task</button>
+      <a class="link-button" href="task-new.php">
+        <span>+</span> New Task
+      </a>
     </div>
   </section>
 </main>

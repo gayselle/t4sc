@@ -16,21 +16,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if (empty($errors)) {
-    $stmt = $pdo->prepare(
-      'INSERT INTO course (course_name, course_desc) VALUES (:course_name, :course_desc)'
-    );
+    if (!isset($_SESSION['user_id'])) {
+      $errors[] = 'You must be logged in to create a course.';
+    } else {
+      $userId = (int) $_SESSION['user_id'];
 
-    try {
-      $stmt->execute([
-        ':course_name' => $course_name,
-        ':course_desc' => $course_desc,
-      ]);
+      $stmt = $pdo->prepare(
+        'INSERT INTO course (course_name, course_desc, user_id) VALUES (:course_name, :course_desc, :user_id)'
+      );
 
-      $newCourseId = (int) $pdo->lastInsertId();
-      header('Location: course.php?id=' . $newCourseId);
-      exit;
-    } catch (PDOException $e) {
-      $errors[] = 'Could not save course. Please try again.';
+      try {
+        $stmt->execute([
+          ':course_name' => $course_name,
+          ':course_desc' => $course_desc,
+          ':user_id' => $userId,
+        ]);
+
+        $newCourseId = (int) $pdo->lastInsertId();
+        header('Location: course.php?id=' . $newCourseId);
+        exit;
+      } catch (PDOException $e) {
+        $errors[] = 'Could not save course. Please try again.';
+      }
     }
   }
 }
@@ -42,7 +49,7 @@ render_sidebar('', $courses);
 render_sidebar_toggle();
 ?>
 <main class="main">
-  <a class="crumb" href="/home.php">&times; Cancel</a>
+  <a class="crumb" href="javascript:history.back()">&times; Cancel</a>
   <h2 class="form-title">New Course</h2>
 
   <section class="panel form-panel">
@@ -72,10 +79,3 @@ render_sidebar_toggle();
       </label>
       <div class="form-actions">
         <button class="solid" type="submit">Save</button>
-      </div>
-    </form>
-  </section>
-</main>
-<?php
-render_shell_close();
-?>
