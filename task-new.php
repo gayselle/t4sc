@@ -10,7 +10,7 @@ render_sidebar_toggle();
 ?>
 <main class="main">
   <a class="crumb" href="/home.php">&times; Cancel</a>
-  <h2>New Task</h2>
+  <h2 class="form-title">New Course</h2>
 
   <section class="panel form-panel">
     <form class="form-grid">

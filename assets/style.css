@@ -217,14 +217,13 @@ button {
   box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
 }
 
+.form-title {
+  margin-left: 40px;
+}
+
 .main {
   padding: 40px 48px 64px;
   animation: fadeIn 0.4s ease;
-}
-
-.main h2 {
-  margin-left: 40px;
-  margin-top: 3%;
 }
 
 @keyframes fadeIn {
