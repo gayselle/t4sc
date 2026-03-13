@@ -2,6 +2,37 @@
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';
+/* session_start();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Sanitize and grab the form data
+    $user_input = trim($_POST['username'] ?? '');
+    $pass_input = $_POST['password'] ?? '';
+
+    if (!empty($input_user) && !empty($input_pass)) {
+        try {
+            // Updated to use your specific table and column names
+            $stmt = $pdo->prepare("SELECT user_name, user_password FROM user WHERE user_name = ?");
+            $stmt->execute([$input_user]);
+            $found_user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Verify the password (assuming it was hashed during registration)
+            if ($found_user && password_verify($input_pass, $found_user['user_password'])) {
+                // SUCCESS
+                $_SESSION['username'] = $found_user['user_name'];
+                
+                // Redirect to your main application page
+                header("Location: home.php"); 
+                exit;
+            } else {
+                // FAIL
+                die("Invalid username or password.");
+            }
+        } catch (PDOException $e) {
+            die("Database Error: " . $e->getMessage());
+        }
+    }
+}
+*/
 
 $currentDate = new DateTime();
 $today = date('Y-m-d');

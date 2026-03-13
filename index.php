@@ -28,7 +28,7 @@ render_head('Welcome to T4SC');
 
     <p class="login-footer">
       New here?
-      <a class="signup-link" href="home.php">Create an account</a>
+      <a class="signup-link" href="create-account.php">Create an account</a>
     </p>
   </main>
 </div>
