@@ -1,7 +1,10 @@
 <?php
+session_start();
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';
+
+$displayName = isset($_SESSION['user_name']) && $_SESSION['user_name'] !== '' ? $_SESSION['user_name'] : $demoUser['name'];
 
 $currentDate = new DateTime();
 $today = date('Y-m-d');
@@ -15,7 +18,7 @@ render_sidebar_toggle();
 ?>
 
 <main class="main">
-  <h2><?php echo $demoUser['greeting']; ?>, <?php echo htmlspecialchars($demoUser['name']); ?>!</h2>
+  <h2><?php echo htmlspecialchars($demoUser['greeting']); ?>, <?php echo htmlspecialchars($displayName); ?>!</h2>
   <p class="summary"><strong>You have <?php echo count($dueToday); ?> tasks due today.</strong></p>
 
   <section class="panel summary">

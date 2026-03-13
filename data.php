@@ -1,33 +1,29 @@
 <?php
-//this is just a sample data so that i can see how it looks like
+require_once __DIR__ . '/db.php';
+
+// fallback demo user; name may be overridden by session in home.php
 $demoUser = [
     'name' => 'Person',
     'greeting' => 'Good day',
 ];
 
-$courses = [
-    [
-        'id' => 1,
-        'name' => 'CompSci 36',
-        'description' => 'Web Systems and Technology for full-stack development. A comprehensive exploration of the technologies used to design, build, and deploy modern web applications.',
-    ],
-    [
-        'id' => 2,
-        'name' => 'CompSci 38',
-        'description' => 'Software Engineering for Software Development Life Cycle (SDLC) and project management. This course emphasizes the methodologies required to manage large-scale software projects within a team environment.',
-    ],
-    [
-        'id' => 3,
-        'name' => 'CS E1',
-        'description' => 'Professional Elective for statistical computing. This elective introduces students to the power of data-driven decision-making. It bridges the gap between raw data and actionable intelligence using modern computational tools.',
-    ],
-    [
-        'id' => 4,
-        'name' => 'CompSci 32',
-        'description' => 'Programming Langauges. This course dives into the "why" behind the syntax. It examines the formal properties, design goals, and implementation of various programming paradigms.',
-    ],
-];
+// load courses from the database table `course`
+$courses = [];
 
+try {
+    $stmt = $pdo->query('SELECT course_id, course_name, course_desc FROM course ORDER BY course_name');
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $courses[] = [
+            'id' => (int) $row['course_id'],
+            'name' => $row['course_name'],
+            'description' => $row['course_desc'],
+        ];
+    }
+} catch (PDOException $e) {
+    // if the query fails, keep $courses as an empty array
+}
+
+//sample data for tasks only
 $tasks = [
     [
         'id' => 101,

@@ -38,11 +38,9 @@ render_head('Welcome to T4SC');
     </p>
 
     <?php if (!empty($errors)): ?>
-      <ul style="margin-bottom:16px; color:#b91c1c; text-align:left; font-size:14px;">
-        <?php foreach ($errors as $error): ?>
-          <li><?php echo htmlspecialchars($error); ?></li>
-        <?php endforeach; ?>
-      </ul>
+      <p style="margin-bottom:16px; color:#b91c1c; text-align:left; font-size:14px;">
+        <?php echo htmlspecialchars(implode(' ', $errors)); ?>
+      </p>
     <?php endif; ?>
 
     <form class="login-form" method="post" action="index.php">
