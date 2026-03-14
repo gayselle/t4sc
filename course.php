@@ -17,16 +17,20 @@ render_sidebar_toggle();
 
   <div class="course-header">
     <a class="crumb" href="home.php">&lt; Back to Home</a>
-    <button class="link-button">Edit Course</button>
+    <?php if ($course): ?>
+      <a class="link-button" href="course-edit.php?id=<?php echo (int) $course['id']; ?>">
+        Edit Course
+      </a>
+    <?php endif; ?>
   </div>
 
-  <h2><?php echo htmlspecialchars($course ? $course['name'] : 'Course Name'); ?></h2>
-  <p><?php echo htmlspecialchars($course ? $course['description'] : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'); ?></p>
+  <h2><?php echo ($course ? $course['name'] : 'Course Name'); ?></h2>
+  <p><?php echo ($course ? $course['description'] : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'); ?></p>
 
   <section class="panel" style="margin-top: 2rem;">
     <div class="task-grid">
       <?php foreach ($courseTasks as $task): ?>
-        <?php render_task_row($task); ?>
+        <?php render_task_row($task, $course ? $course['name'] : ''); ?>
       <?php endforeach; ?>
     </div>
     <div class="panel-actions">

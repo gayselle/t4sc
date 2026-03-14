@@ -7,7 +7,7 @@ function render_head($title = 'T4SC') {
     echo "  <meta charset='utf-8'>\n";
     echo "  <meta name='viewport' content='width=device-width, initial-scale=1'>\n";
     echo "  <title>" . $title . "</title>\n";
-    echo "  <link rel='stylesheet' href='assets/style.css'>\n";
+    echo "  <link rel='stylesheet' href='assets/style.css?v=2'>\n";
     echo "</head>\n";
     echo "<body>\n";
 }
@@ -97,15 +97,35 @@ function render_task_row($task, $courseName = '') {
     $course = $courseName;
     $taskId = (int) $task['id'];
 
-    echo "<a class='task-row' href='task.php?id=$taskId'>\n";
-    echo "  <div class='chip'>$name</div>\n";
+    $priorityClass = '';
+    if ($priority === 'Low') {
+        $priorityClass = ' priority-low';
+    } elseif ($priority === 'Medium') {
+        $priorityClass = ' priority-medium';
+    } elseif ($priority === 'High') {
+        $priorityClass = ' priority-high';
+    }
+
+    $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI'] ?? 'home.php', ENT_QUOTES);
+
+    echo "<div class='task-row'>\n";
+    echo "  <div class='chip' style='text-align:left;'><a href='task.php?id=$taskId'>$name</a></div>\n";
     if ($courseName !== '') {
         echo "  <div class='chip muted'>$course</div>\n";
     } else {
-        echo "  <div class='chip muted'>$deadline</div>\n";
+        echo "  <div class='chip muted'>$course</div>\n";
     }
-    echo "  <div class='chip'>$priority</div>\n";
-    echo "  <div class='chip'>$status</div>\n";
-    echo "</a>\n";
+    echo "  <div class='chip muted'>$deadline</div>\n";
+    echo "  <div class='chip$priorityClass'>$priority</div>\n";
+    $checked = $status === 'Completed' ? "checked='checked'" : '';
+    echo "  <div class='chip task-status-toggle'>\n";
+    echo "    <form method='post' action='task-toggle.php' class='task-status-form'>\n";
+    echo "      <input type='hidden' name='task_id' value='$taskId'>\n";
+    echo "      <input type='hidden' name='redirect' value=\"$currentUrl\">\n";
+    echo "      <input type='checkbox' name='completed' value='1' $checked onchange='this.form.submit()'>\n";
+    echo "      <span>$status</span>\n";
+    echo "    </form>\n";
+    echo "  </div>\n";
+    echo "</div>\n";
 }
 ?>

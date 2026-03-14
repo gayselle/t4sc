@@ -17,11 +17,9 @@ render_sidebar_toggle();
   <section class="panel">
     <div class="task-grid">
       <?php foreach ($completed as $task): ?>
-        <?php render_task_row($task); ?>
+        <?php $course = find_course($courses, $task['course_id']); ?>
+        <?php render_task_row($task, $course ? $course['name'] : 'Course'); ?>
       <?php endforeach; ?>
-    </div>
-    <div class="panel-actions">
-      <button class="link-button">See More <span>▲</span></button>
     </div>
   </section>
 </main>

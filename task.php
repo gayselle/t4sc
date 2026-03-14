@@ -21,7 +21,11 @@ render_sidebar_toggle();
 <main class="main">
   <div class="course-header">
     <a class="crumb" href="course.php?id=<?php echo $course ? $course['id'] : 1; ?>">&lt; Back to Course</a>
-    <button class="link-button">Edit Task</button>
+    <?php if ($task): ?>
+      <a class="link-button" href="task-edit.php?id=<?php echo (int) $task['id']; ?>">
+        Edit Task
+      </a>
+    <?php endif; ?>
   </div>
 
   <h2><?php echo htmlspecialchars($task ? $task['name'] : 'Task Name'); ?></h2>

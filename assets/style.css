@@ -217,13 +217,14 @@ button {
   box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
 }
 
-.form-title {
-  margin-left: 40px;
-}
-
 .main {
   padding: 40px 48px 64px;
   animation: fadeIn 0.4s ease;
+}
+
+h2.new {
+  margin-left: 40px;
+  margin-top: 3%;
 }
 
 @keyframes fadeIn {
@@ -291,7 +292,7 @@ p {
 
 .task-row {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: 2fr 1fr 1fr 0.8fr 1.2fr;
   gap: 16px;
   text-decoration: none;
   color: inherit;
@@ -306,8 +307,42 @@ p {
   padding: 12.8px 16px;
   border-radius: 12px;
   background: #f9fafb;
-  text-align: center;
+  text-align: left;
   font-size: 15.2px;
+}
+
+.task-status-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.task-status-toggle input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+.task-status-toggle span {
+  white-space: nowrap;
+}
+
+.priority-low {
+  border-color: #60a5fa;
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.priority-medium {
+  border-color: #fbbf24;
+  background: #fffbeb;
+  color: #92400e;
+}
+
+.priority-high {
+  border-color: #fca5a5;
+  background: #fef2f2;
+  color: #b91c1c;
 }
 
 .chip.muted {
@@ -364,6 +399,32 @@ p {
   background: var(--panel);
 }
 
+.task-filters {
+  flex-wrap: wrap;
+  align-items: flex-end;
+  column-gap: 16px;
+  row-gap: 12px;
+}
+
+.task-filters .labelled {
+  min-width: 200px;
+  max-width: 260px;
+}
+
+.task-filters select {
+  padding: 12px 10px;
+}
+
+.filters-apply {
+  margin-left: auto;
+}
+
+.task-filters .filters-apply {
+  padding: 12px 10px;
+  min-width: 120px;
+  justify-content: center;
+}
+
 .grouped {
   display: grid;
   gap: 24px;
@@ -397,6 +458,10 @@ p {
 
 .course-panel-header .link-button {
   background: var(--panel);
+}
+
+.form-title {
+  margin-left: 40px;
 }
 
 .course-card {
@@ -464,7 +529,7 @@ textarea {
 }
 
 .login-card {
-  width: min(420px, 100%);
+  width: min(520px, 100%);
   background: #ffffff;
   border-radius: 12px;
   border: 1px solid var(--line);
