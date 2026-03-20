@@ -1,10 +1,17 @@
 <?php
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';
+require_login();
 
-$courseId = isset($_GET['id']) ? (int) $_GET['id'] : 1;
+$courseId = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 $course = find_course($courses, $courseId);
-$courseTasks = $course ? tasks_for_course($tasks, $course['id']) : [];
+
+if (!$course) {
+    header('Location: home.php');
+    exit;
+}
+
+$courseTasks = tasks_for_course($tasks, $course['id']);
 
 render_head('Course Overview');
 render_topbar();
@@ -17,20 +24,18 @@ render_sidebar_toggle();
 
   <div class="course-header">
     <a class="crumb" href="home.php">&lt; Back to Home</a>
-    <?php if ($course): ?>
-      <a class="link-button" href="course-edit.php?id=<?php echo (int) $course['id']; ?>">
-        Edit Course
-      </a>
-    <?php endif; ?>
+    <a class="link-button" href="course-edit.php?id=<?php echo (int) $course['id']; ?>">
+      Edit Course
+    </a>
   </div>
 
-  <h2><?php echo ($course ? $course['name'] : 'Course Name'); ?></h2>
-  <p><?php echo ($course ? $course['description'] : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'); ?></p>
+  <h2><?php echo htmlspecialchars($course['name']); ?></h2>
+  <p><?php echo htmlspecialchars($course['description']); ?></p>
 
   <section class="panel" style="margin-top: 2rem;">
     <div class="task-grid">
       <?php foreach ($courseTasks as $task): ?>
-        <?php render_task_row($task, $course ? $course['name'] : ''); ?>
+        <?php render_task_row($task, $course['name']); ?>
       <?php endforeach; ?>
     </div>
     <div class="panel-actions">

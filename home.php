@@ -3,6 +3,7 @@ session_start();
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';
+require_login();
 
 $displayName = isset($_SESSION['user_name']) && $_SESSION['user_name'] !== '' ? $_SESSION['user_name'] : $demoUser['name'];
 
@@ -73,7 +74,7 @@ render_sidebar_toggle();
         <option value="0">All courses</option>
         <?php foreach ($courses as $course): ?>
           <option value="<?php echo (int) $course['id']; ?>" <?php echo $filterCourseId === (int) $course['id'] ? 'selected' : ''; ?>>
-            <?php echo ($course['name']); ?>
+            <?php echo htmlspecialchars($course['name']); ?>
           </option>
         <?php endforeach; ?>
       </select>

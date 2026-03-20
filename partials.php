@@ -58,6 +58,7 @@ function render_sidebar($active = 'home', $courses = []) {
     }
 
     echo "  </div>\n";
+    echo "  <a href='logout.php' class='sidebar-logout'>Log Out</a>\n";
     echo "</aside>\n";
 }
 
@@ -109,21 +110,21 @@ function render_task_row($task, $courseName = '') {
     $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI'] ?? 'home.php', ENT_QUOTES);
 
     echo "<div class='task-row'>\n";
-    echo "  <div class='chip' style='text-align:left;'><a href='task.php?id=$taskId'>$name</a></div>\n";
+    echo "  <div class='chip' style='text-align:left;'><a href='task.php?id=$taskId'>" . htmlspecialchars($name) . "</a></div>\n";
     if ($courseName !== '') {
-        echo "  <div class='chip muted'>$course</div>\n";
+        echo "  <div class='chip muted'>" . htmlspecialchars($course) . "</div>\n";
     } else {
-        echo "  <div class='chip muted'>$course</div>\n";
+        echo "  <div class='chip muted'>" . htmlspecialchars($course) . "</div>\n";
     }
-    echo "  <div class='chip muted'>$deadline</div>\n";
-    echo "  <div class='chip$priorityClass'>$priority</div>\n";
+    echo "  <div class='chip muted'>" . htmlspecialchars($deadline) . "</div>\n";
+    echo "  <div class='chip$priorityClass'>" . htmlspecialchars($priority) . "</div>\n";
     $checked = $status === 'Completed' ? "checked='checked'" : '';
     echo "  <div class='chip task-status-toggle'>\n";
     echo "    <form method='post' action='task-toggle.php' class='task-status-form'>\n";
     echo "      <input type='hidden' name='task_id' value='$taskId'>\n";
     echo "      <input type='hidden' name='redirect' value=\"$currentUrl\">\n";
     echo "      <input type='checkbox' name='completed' value='1' $checked onchange='this.form.submit()'>\n";
-    echo "      <span>$status</span>\n";
+    echo "      <span>" . htmlspecialchars($status) . "</span>\n";
     echo "    </form>\n";
     echo "  </div>\n";
     echo "</div>\n";

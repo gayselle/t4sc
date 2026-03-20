@@ -114,6 +114,24 @@ button {
   border-right: 1px solid var(--line);
   padding: 24px 20px;
   background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-logout {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14.4px;
+  font-weight: 500;
+  color: var(--muted);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-logout:hover {
+  background: #fee2e2;
+  color: #dc2626;
 }
 
 .sidebar-block {
