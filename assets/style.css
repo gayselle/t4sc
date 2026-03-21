@@ -114,24 +114,23 @@ button {
   border-right: 1px solid var(--line);
   padding: 24px 20px;
   background: var(--panel);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
-.sidebar-logout {
-  display: block;
-  padding: 10px 14px;
+.logout-btn {
+  display: inline-block;
+  padding: 10px 20px;
   border-radius: 10px;
   font-size: 14.4px;
   font-weight: 500;
-  color: var(--muted);
-  transition: background 0.15s ease, color 0.15s ease;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+  background: #fff1f2;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
-.sidebar-logout:hover {
+.logout-btn:hover {
   background: #fee2e2;
-  color: #dc2626;
+  border-color: #dc2626;
 }
 
 .sidebar-block {
