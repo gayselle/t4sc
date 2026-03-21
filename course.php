@@ -20,8 +20,6 @@ render_sidebar('', $courses, $course['id']);
 render_sidebar_toggle();
 ?>
 <main class="main">
-  <div class="hero"></div>
-
   <div class="course-header">
     <a class="crumb" href="home.php">&lt; Back to Home</a>
     <div style="margin-left: auto; display: flex; gap: 8px;">
