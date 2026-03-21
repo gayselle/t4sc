@@ -89,21 +89,21 @@ render_shell_open();
 render_sidebar('', $courses);
 render_sidebar_toggle();
 ?>
-<main class="main">
-  <a class="crumb" href="javascript:history.back()">&times; Cancel</a>
-  <h2>Edit Task</h2>
+<main class="flex-grow-1 p-4 p-md-5 main-content">
+  <a class="text-muted text-decoration-none mb-3 d-inline-block" href="javascript:history.back()">&times; Cancel</a>
+  <h2 class="mb-4">Edit Task</h2>
 
-  <div class="card" style="max-width: 800px;">
-    <div class="card-body">
+  <div class="card shadow-sm" style="max-width:860px;">
+    <div class="card-body p-4">
       <?php if (!empty($errors)): ?>
-        <div class="alert alert-danger py-2"><?php echo htmlspecialchars(implode(' ', $errors)); ?></div>
+        <div class="alert alert-danger"><?php echo htmlspecialchars(implode(' ', $errors)); ?></div>
       <?php endif; ?>
 
       <?php if ($task): ?>
         <form method="post" action="task-edit.php?id=<?php echo (int) $taskId; ?>">
           <div class="mb-3">
             <label class="form-label fw-medium">Task Name</label>
-            <input class="form-control" type="text" name="task_name" placeholder="Task Name" value="<?php echo htmlspecialchars($task_name); ?>" required>
+            <input type="text" class="form-control" name="task_name" placeholder="Task Name" value="<?php echo htmlspecialchars($task_name); ?>" required>
           </div>
 
           <div class="row g-3 mb-3">
@@ -112,10 +112,7 @@ render_sidebar_toggle();
               <select class="form-select" name="course_id" required>
                 <option value="">Select a course</option>
                 <?php foreach ($courses as $course): ?>
-                  <option
-                    value="<?php echo (int) $course['id']; ?>"
-                    <?php echo $task_course_id === (int) $course['id'] ? 'selected' : ''; ?>
-                  >
+                  <option value="<?php echo (int) $course['id']; ?>" <?php echo $task_course_id === (int) $course['id'] ? 'selected' : ''; ?>>
                     <?php echo htmlspecialchars($course['name']); ?>
                   </option>
                 <?php endforeach; ?>
@@ -133,7 +130,7 @@ render_sidebar_toggle();
           <div class="row g-3 mb-3">
             <div class="col-md-6">
               <label class="form-label fw-medium">Deadline</label>
-              <input class="form-control" type="date" name="task_due" value="<?php echo htmlspecialchars($task_due); ?>" required>
+              <input type="date" class="form-control" name="task_due" value="<?php echo htmlspecialchars($task_due); ?>" required>
             </div>
             <div class="col-md-6">
               <label class="form-label fw-medium">Priority</label>
@@ -148,11 +145,11 @@ render_sidebar_toggle();
 
           <div class="mb-3">
             <label class="form-label fw-medium">Task Description</label>
-            <textarea class="form-control" name="task_desc" placeholder="Task Description" rows="5"><?php echo htmlspecialchars($task_desc); ?></textarea>
+            <textarea class="form-control" name="task_desc" placeholder="Task Description" style="min-height:120px;"><?php echo htmlspecialchars($task_desc); ?></textarea>
           </div>
 
           <div class="d-flex justify-content-end">
-            <button class="btn btn-primary" type="submit">Save Changes</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
           </div>
         </form>
       <?php endif; ?>

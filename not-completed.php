@@ -10,32 +10,27 @@ render_shell_open();
 render_sidebar('not-completed', $courses);
 render_sidebar_toggle();
 ?>
-<main class="main">
-  <a class="crumb" href="home.php">&lt; Back to Home</a>
-  <h2>Not Completed</h2>
-  <p class="text-muted mb-3">You have <strong class="text-dark"><?php echo count($pending); ?></strong> uncompleted tasks.</p>
+<main class="flex-grow-1 p-4 p-md-5 main-content">
+  <a class="text-muted text-decoration-none mb-3 d-inline-block" href="home.php">&lt; Back to Home</a>
+  <h2 class="mb-1">Not Completed</h2>
+  <p class="text-muted mb-4">You have <strong class="text-dark"><?php echo count($pending); ?></strong> uncompleted tasks.</p>
 
-  <div class="card">
+  <div class="card shadow-sm">
     <div class="card-body p-0">
-      <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-          <thead class="table-light">
-            <tr>
-              <th>Task</th>
-              <th>Course</th>
-              <th>Deadline</th>
-              <th>Priority</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach ($pending as $task): ?>
-              <?php $course = find_course($courses, $task['course_id']); ?>
-              <?php render_task_row($task, $course ? $course['name'] : 'Course'); ?>
-            <?php endforeach; ?>
-          </tbody>
-        </table>
-      </div>
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr><th>Task</th><th>Course</th><th>Deadline</th><th>Priority</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <?php foreach ($pending as $task): ?>
+            <?php $course = find_course($courses, $task['course_id']); ?>
+            <?php render_task_row($task, $course ? $course['name'] : 'Course'); ?>
+          <?php endforeach; ?>
+          <?php if (empty($pending)): ?>
+            <tr><td colspan="5" class="text-center text-muted py-3">All tasks are completed!</td></tr>
+          <?php endif; ?>
+        </tbody>
+      </table>
     </div>
   </div>
 </main>

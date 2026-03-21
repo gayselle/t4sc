@@ -60,30 +60,28 @@ render_shell_open();
 render_sidebar('', $courses);
 render_sidebar_toggle();
 ?>
-<main class="main">
-  <a class="crumb" href="javascript:history.back()">&times; Cancel</a>
-  <h2>Edit Course</h2>
+<main class="flex-grow-1 p-4 p-md-5 main-content">
+  <a class="text-muted text-decoration-none mb-3 d-inline-block" href="javascript:history.back()">&times; Cancel</a>
+  <h2 class="mb-4">Edit Course</h2>
 
-  <div class="card" style="max-width: 600px;">
-    <div class="card-body">
+  <div class="card shadow-sm" style="max-width:680px;">
+    <div class="card-body p-4">
       <?php if (!empty($errors)): ?>
-        <div class="alert alert-danger py-2"><?php echo htmlspecialchars(implode(' ', $errors)); ?></div>
+        <div class="alert alert-danger"><?php echo htmlspecialchars(implode(' ', $errors)); ?></div>
       <?php endif; ?>
 
       <?php if ($course): ?>
         <form method="post" action="course-edit.php?id=<?php echo (int) $courseId; ?>">
           <div class="mb-3">
             <label class="form-label fw-medium">Course Name</label>
-            <input class="form-control" type="text" name="course_name" placeholder="Course Name" value="<?php echo htmlspecialchars($course_name); ?>" required>
+            <input type="text" class="form-control" name="course_name" placeholder="Course Name" value="<?php echo htmlspecialchars($course_name); ?>" required>
           </div>
-
           <div class="mb-3">
             <label class="form-label fw-medium">Course Description</label>
-            <textarea class="form-control" name="course_desc" placeholder="Course Description" rows="4"><?php echo htmlspecialchars($course_desc); ?></textarea>
+            <textarea class="form-control" name="course_desc" placeholder="Course Description" style="min-height:120px;"><?php echo htmlspecialchars($course_desc); ?></textarea>
           </div>
-
           <div class="d-flex justify-content-end">
-            <button class="btn btn-primary" type="submit">Save Changes</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
           </div>
         </form>
       <?php endif; ?>
