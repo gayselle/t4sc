@@ -2,6 +2,7 @@
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';
+require_login();
 
 $errors = [];
 

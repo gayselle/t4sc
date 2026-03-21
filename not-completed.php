@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';
+require_login();
 
 $pending = tasks_by_status($tasks, 'Not Completed');
 render_head('Not Completed Tasks');

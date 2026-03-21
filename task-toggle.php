@@ -10,6 +10,11 @@ if (!isset($_SESSION['user_id'])) {
 $taskId = isset($_POST['task_id']) ? (int) $_POST['task_id'] : 0;
 $redirect = $_POST['redirect'] ?? 'home.php';
 
+// Prevent open redirect: reject absolute URLs and protocol-relative URLs
+if (preg_match('#^https?://#i', $redirect) || str_starts_with($redirect, '//')) {
+    $redirect = 'home.php';
+}
+
 if ($taskId > 0) {
     $userId = (int) $_SESSION['user_id'];
     $newStatus = isset($_POST['completed']) ? 'Completed' : 'Not Completed';

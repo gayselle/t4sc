@@ -2,6 +2,7 @@
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';
+require_login();
 
 $errors = [];
 $task_name = '';
@@ -85,7 +86,7 @@ render_sidebar_toggle();
           type="text"
           name="task_name"
           placeholder="Task Name"
-          value="<?php echo ($task_name); ?>"
+          value="<?php echo htmlspecialchars($task_name); ?>"
           required
         >
       </label>
@@ -100,7 +101,7 @@ render_sidebar_toggle();
                 value="<?php echo (int) $course['id']; ?>"
                 <?php echo $task_course_id === (int) $course['id'] ? 'selected' : ''; ?>
               >
-                <?php echo ($course['name']); ?>
+                <?php echo htmlspecialchars($course['name']); ?>
               </option>
             <?php endforeach; ?>
           </select>
@@ -121,7 +122,7 @@ render_sidebar_toggle();
           <input
             type="date"
             name="task_due"
-            value="<?php echo ($task_due); ?>"
+            value="<?php echo htmlspecialchars($task_due); ?>"
             required
           >
         </label>
@@ -141,7 +142,7 @@ render_sidebar_toggle();
         <textarea
           name="task_desc"
           placeholder="Task Description"
-        ><?php echo ($task_desc); ?></textarea>
+        ><?php echo htmlspecialchars($task_desc); ?></textarea>
       </label>
 
       <div class="form-actions">

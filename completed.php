@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';
+require_login();
 
 $completed = tasks_by_status($tasks, 'Completed');
 render_head('Completed Tasks');

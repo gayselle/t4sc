@@ -7,6 +7,7 @@ function render_head($title = 'T4SC') {
     echo "  <meta charset='utf-8'>\n";
     echo "  <meta name='viewport' content='width=device-width, initial-scale=1'>\n";
     echo "  <title>" . $title . "</title>\n";
+    echo "  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css'>\n";
     echo "  <link rel='stylesheet' href='assets/style.css?v=2'>\n";
     echo "</head>\n";
     echo "<body>\n";
@@ -14,13 +15,13 @@ function render_head($title = 'T4SC') {
 
 function render_topbar() {
     echo "<header class='topbar'>\n";
-    echo "  <div class='logo'>LOGO</div>\n";
+    echo "  <a class='logo' href='home.php'>LOGO</a>\n";
     echo "  <div class='search'>\n";
     echo "    <input type='search' placeholder='Search Tasks...'>\n";
     echo "  </div>\n";
     echo "  <nav class='top-actions'>\n";
     echo "    <div class='ghost'>Profile</div>\n";
-    echo "    <div class='ghost'>Settings</div>\n";
+    echo "    <a class='ghost' href='settings.php'>Settings</a>\n";
     echo "  </nav>\n";
     echo "</header>\n";
 }
@@ -67,6 +68,7 @@ function render_shell_open() {
 
 function render_shell_close() {
     echo "</div>\n";
+    echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>\n";
 }
 
 function render_sidebar_toggle() {
@@ -109,21 +111,21 @@ function render_task_row($task, $courseName = '') {
     $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI'] ?? 'home.php', ENT_QUOTES);
 
     echo "<div class='task-row'>\n";
-    echo "  <div class='chip' style='text-align:left;'><a href='task.php?id=$taskId'>$name</a></div>\n";
+    echo "  <div class='chip' style='text-align:left;'><a href='task.php?id=$taskId'>" . htmlspecialchars($name) . "</a></div>\n";
     if ($courseName !== '') {
-        echo "  <div class='chip muted'>$course</div>\n";
+        echo "  <div class='chip muted'>" . htmlspecialchars($course) . "</div>\n";
     } else {
-        echo "  <div class='chip muted'>$course</div>\n";
+        echo "  <div class='chip muted'>" . htmlspecialchars($course) . "</div>\n";
     }
-    echo "  <div class='chip muted'>$deadline</div>\n";
-    echo "  <div class='chip$priorityClass'>$priority</div>\n";
+    echo "  <div class='chip muted'>" . htmlspecialchars($deadline) . "</div>\n";
+    echo "  <div class='chip$priorityClass'>" . htmlspecialchars($priority) . "</div>\n";
     $checked = $status === 'Completed' ? "checked='checked'" : '';
     echo "  <div class='chip task-status-toggle'>\n";
     echo "    <form method='post' action='task-toggle.php' class='task-status-form'>\n";
     echo "      <input type='hidden' name='task_id' value='$taskId'>\n";
     echo "      <input type='hidden' name='redirect' value=\"$currentUrl\">\n";
     echo "      <input type='checkbox' name='completed' value='1' $checked onchange='this.form.submit()'>\n";
-    echo "      <span>$status</span>\n";
+    echo "      <span>" . htmlspecialchars($status) . "</span>\n";
     echo "    </form>\n";
     echo "  </div>\n";
     echo "</div>\n";
