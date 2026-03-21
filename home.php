@@ -45,6 +45,13 @@ if ($filterSort === 'priority') {
 $currentDate = new DateTime();
 $today = date('Y-m-d');
 $dueToday = tasks_due_today($tasks, $today);
+$overdueTasks = array_values(array_filter($tasks, function ($task) use ($today) {
+    $deadline = $task['deadline'] ?? '';
+    $status = $task['status'] ?? '';
+    $isDateFormat = is_string($deadline) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $deadline) === 1;
+    return $status !== 'Completed' && $isDateFormat && $deadline < $today;
+}));
+$overdueCount = count($overdueTasks);
 
 render_head('T4SC Dashboard');
 render_topbar();
@@ -55,7 +62,12 @@ render_sidebar_toggle();
 
 <main class="main">
   <h2><?php echo ($demoUser['greeting']); ?>, <?php echo ($displayName); ?>!</h2>
-  <p class="summary"><strong>You have <?php echo count($dueToday); ?> tasks due today.</strong></p>
+  <p class="summary">
+    <strong>You have <?php echo count($dueToday); ?> tasks due today.</strong>
+    <?php if ($overdueCount > 0): ?>
+      <span class="overdue-count-badge" title="Overdue tasks"><?php echo $overdueCount; ?> overdue tasks</span>
+    <?php endif; ?>
+  </p>
 
   <section class="panel summary">
     <div class="task-grid">

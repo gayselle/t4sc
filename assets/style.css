@@ -309,6 +309,19 @@ p {
   color: var(--ink);
 }
 
+.overdue-count-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #fca5a5;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 12.8px;
+  font-weight: 600;
+}
+
 .task-grid {
   display: grid;
   gap: 16px;
@@ -320,6 +333,16 @@ p {
   gap: 16px;
   text-decoration: none;
   color: inherit;
+}
+
+.task-row.overdue-task .chip:first-child {
+  border-color: #fca5a5;
+  background: #fff5f5;
+}
+
+.task-row.overdue-task .task-name-chip,
+.task-row.overdue-task .task-name-chip a {
+  color: #b91c1c;
 }
 
 .task-row .chip {
@@ -371,6 +394,32 @@ p {
 
 .chip.muted {
   color: var(--muted);
+}
+
+.chip.overdue-deadline {
+  border-color: #fca5a5;
+  background: #fef2f2;
+  color: #b91c1c;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.overdue-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #dc2626;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: help;
 }
 
 .panel-actions {

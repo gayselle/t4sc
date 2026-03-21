@@ -106,15 +106,24 @@ function render_task_row($task, $courseName = '') {
     }
 
     $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI'] ?? 'home.php', ENT_QUOTES);
+    $today = date('Y-m-d');
+    $isDateFormat = is_string($deadline) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $deadline) === 1;
+    $isOverdue = $status !== 'Completed' && $isDateFormat && $deadline < $today;
+    $rowClass = $isOverdue ? ' overdue-task' : '';
+    $deadlineClass = $isOverdue ? ' overdue-deadline' : '';
 
-    echo "<div class='task-row'>\n";
-    echo "  <div class='chip' style='text-align:left;'><a href='task.php?id=$taskId'>" . htmlspecialchars($name) . "</a></div>\n";
+    echo "<div class='task-row$rowClass'>\n";
+    echo "  <div class='chip task-name-chip' style='text-align:left;'><a href='task.php?id=$taskId'>" . htmlspecialchars($name) . "</a></div>\n";
     if ($courseName !== '') {
         echo "  <div class='chip muted'>" . htmlspecialchars($course) . "</div>\n";
     } else {
         echo "  <div class='chip muted'>" . htmlspecialchars($course) . "</div>\n";
     }
-    echo "  <div class='chip muted'>" . htmlspecialchars($deadline) . "</div>\n";
+    echo "  <div class='chip muted$deadlineClass'>" . htmlspecialchars($deadline);
+    if ($isOverdue) {
+        echo " <span class='overdue-icon' title='Overdue' aria-label='Overdue'>!</span>";
+    }
+    echo "</div>\n";
     echo "  <div class='chip$priorityClass'>" . htmlspecialchars($priority) . "</div>\n";
     $checked = $status === 'Completed' ? "checked='checked'" : '';
     echo "  <div class='chip task-status-toggle'>\n";
