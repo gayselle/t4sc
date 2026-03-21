@@ -26,11 +26,21 @@ render_sidebar('', $courses);
 render_sidebar_toggle();
 ?>
 <main class="main">
-  <div class="course-header">
+  <div class="course-header" style="display: flex; align-items: center; gap: 10px;">
     <a class="crumb" href="course.php?id=<?php echo $course ? (int) $course['id'] : 0; ?>">&lt; Back to Course</a>
-    <a class="link-button" href="task-edit.php?id=<?php echo (int) $task['id']; ?>">
-      Edit Task
-    </a>
+    
+    <div style="margin-left: auto; display: flex; gap: 8px;">
+      <a class="link-button" href="task-edit.php?id=<?php echo (int) $task['id']; ?>">
+        Edit Task
+      </a>
+
+      <form action="task-delete.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this task? This cannot be undone.');" style="display: inline;">
+        <input type="hidden" name="task_id" value="<?php echo (int) $task['id']; ?>">
+        <button type="submit" class="delete-btn">
+          Delete Task
+        </button>
+      </form>
+    </div>
   </div>
 
   <h2><?php echo htmlspecialchars($task['name']); ?></h2>

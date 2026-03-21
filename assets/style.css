@@ -67,10 +67,10 @@ button {
 }
 
 .topbar {
-  display: grid;
-  grid-template-columns: 160px 1fr 240px;
-  gap: 24px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  gap: 24px;
   padding: 20px 32px;
   background: var(--panel);
   border-bottom: 1px solid var(--line);
@@ -83,12 +83,6 @@ button {
   font-weight: 700;
   font-size: 20.8px;
   letter-spacing: 0.02em;
-}
-
-.search input {
-  width: 100%;
-  max-width: 520px;
-  background: #f9fafb;
 }
 
 .top-actions {
@@ -131,6 +125,18 @@ button {
 .logout-btn:hover {
   background: #fee2e2;
   border-color: #dc2626;
+}
+
+.delete-btn {
+  background-color: #dc2626; 
+  color: white; 
+  border: none; 
+  cursor: pointer;
+  padding: 9.6px 16px;
+  border-radius: 10px;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
 }
 
 .sidebar-block {
@@ -228,6 +234,7 @@ button {
   transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
+.pill.active,
 .pill:hover {
   background: #eef2ff;
   border-color: rgba(79, 70, 229, 0.3);

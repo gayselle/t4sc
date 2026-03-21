@@ -16,17 +16,13 @@ function render_head($title = 'T4SC') {
 function render_topbar() {
     echo "<header class='topbar'>\n";
     echo "  <a class='logo' href='home.php'>LOGO</a>\n";
-    echo "  <div class='search'>\n";
-    echo "    <input type='search' placeholder='Search Tasks...'>\n";
-    echo "  </div>\n";
     echo "  <nav class='top-actions'>\n";
-    echo "    <div class='ghost'>Profile</div>\n";
-    echo "    <a class='ghost' href='settings.php'>Settings</a>\n";
+    echo "    <a class='ghost' href='settings.php'>Profile</a>\n";
     echo "  </nav>\n";
     echo "</header>\n";
 }
 
-function render_sidebar($active = 'home', $courses = []) {
+function render_sidebar($active = 'home', $courses = [], $activeCourseId = 0) {
     $navItems = [
         'home' => ['label' => 'Home', 'href' => 'home.php'],
         'not-completed' => ['label' => 'Not Completed', 'href' => 'not-completed.php'],
@@ -55,7 +51,8 @@ function render_sidebar($active = 'home', $courses = []) {
 
     foreach ($courses as $course) {
         $name = $course['name'];
-        echo "    <a class='pill' href='course.php?id={$course['id']}'>$name</a>\n";
+        $isCourseActive = ((int) $activeCourseId === (int) $course['id']) ? 'active' : '';
+        echo "    <a class='pill $isCourseActive' href='course.php?id={$course['id']}'>$name</a>\n";
     }
 
     echo "  </div>\n";
