@@ -12,13 +12,15 @@ render_sidebar_toggle();
 <main class="main">
   <h2>Settings</h2>
 
-  <section class="panel form-panel" style="margin-top: 24px;">
-    <h3>Account</h3>
-    <p style="margin-top: 8px; margin-bottom: 20px; color: var(--muted); font-size: 14.4px;">
-      Signed in as <strong><?php echo htmlspecialchars($_SESSION['user_name']); ?></strong>
-    </p>
-    <a href="logout.php" class="logout-btn">Log Out</a>
-  </section>
+  <div class="card mt-4" style="max-width: 520px;">
+    <div class="card-body">
+      <h5 class="card-title">Account</h5>
+      <p class="text-muted mb-3">
+        Signed in as <strong class="text-dark"><?php echo htmlspecialchars($_SESSION['user_name']); ?></strong>
+      </p>
+      <a href="logout.php" class="btn btn-outline-danger btn-sm">Log Out</a>
+    </div>
+  </div>
 </main>
 <?php
 render_shell_close();

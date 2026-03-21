@@ -22,28 +22,39 @@ render_sidebar_toggle();
 <main class="main">
   <div class="hero"></div>
 
-  <div class="course-header">
+  <div class="d-flex justify-content-between align-items-center mb-4">
     <a class="crumb" href="home.php">&lt; Back to Home</a>
-    <a class="link-button" href="course-edit.php?id=<?php echo (int) $course['id']; ?>">
-      Edit Course
-    </a>
+    <a class="btn btn-outline-secondary btn-sm" href="course-edit.php?id=<?php echo (int) $course['id']; ?>">Edit Course</a>
   </div>
 
   <h2><?php echo htmlspecialchars($course['name']); ?></h2>
-  <p><?php echo htmlspecialchars($course['description']); ?></p>
+  <p class="text-muted mb-4"><?php echo htmlspecialchars($course['description']); ?></p>
 
-  <section class="panel" style="margin-top: 2rem;">
-    <div class="task-grid">
-      <?php foreach ($courseTasks as $task): ?>
-        <?php render_task_row($task, $course['name']); ?>
-      <?php endforeach; ?>
+  <div class="card">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Task</th>
+              <th>Course</th>
+              <th>Deadline</th>
+              <th>Priority</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($courseTasks as $task): ?>
+              <?php render_task_row($task, $course['name']); ?>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="panel-actions">
-      <a class="link-button" href="task-new.php">
-        <span>+</span> New Task
-      </a>
+    <div class="card-footer text-end">
+      <a class="btn btn-primary btn-sm" href="task-new.php">+ New Task</a>
     </div>
-  </section>
+  </div>
 </main>
 <?php
 render_shell_close();

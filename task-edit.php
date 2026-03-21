@@ -91,88 +91,73 @@ render_sidebar_toggle();
 ?>
 <main class="main">
   <a class="crumb" href="javascript:history.back()">&times; Cancel</a>
-  <h2 class="form-title">Edit Task</h2>
+  <h2>Edit Task</h2>
 
-  <section class="panel form-panel">
-    <?php if (!empty($errors)): ?>
-      <p style="margin-bottom:16px; color:#b91c1c; text-align:left; font-size:14px;">
-        <?php echo htmlspecialchars(implode(' ', $errors)); ?>
-      </p>
-    <?php endif; ?>
+  <div class="card" style="max-width: 800px;">
+    <div class="card-body">
+      <?php if (!empty($errors)): ?>
+        <div class="alert alert-danger py-2"><?php echo htmlspecialchars(implode(' ', $errors)); ?></div>
+      <?php endif; ?>
 
-    <?php if ($task): ?>
-      <form class="form-grid" method="post" action="task-edit.php?id=<?php echo (int) $taskId; ?>">
-        <label class="labelled">
-          Task Name
-          <input
-            type="text"
-            name="task_name"
-            placeholder="Task Name"
-            value="<?php echo htmlspecialchars($task_name); ?>"
-            required
-          >
-        </label>
+      <?php if ($task): ?>
+        <form method="post" action="task-edit.php?id=<?php echo (int) $taskId; ?>">
+          <div class="mb-3">
+            <label class="form-label fw-medium">Task Name</label>
+            <input class="form-control" type="text" name="task_name" placeholder="Task Name" value="<?php echo htmlspecialchars($task_name); ?>" required>
+          </div>
 
-        <div class="form-row">
-          <label class="labelled">
-            Course
-            <select name="course_id" required>
-              <option value="">Select a course</option>
-              <?php foreach ($courses as $course): ?>
-                <option
-                  value="<?php echo (int) $course['id']; ?>"
-                  <?php echo $task_course_id === (int) $course['id'] ? 'selected' : ''; ?>
-                >
-                  <?php echo htmlspecialchars($course['name']); ?>
-                </option>
-              <?php endforeach; ?>
-            </select>
-          </label>
-          
-          <label class="labelled">
-            Status
-            <select name="task_status">
-              <option value="Not Completed" <?php echo $task_status === 'Not Completed' ? 'selected' : ''; ?>>Not Completed</option>
-              <option value="Completed" <?php echo $task_status === 'Completed' ? 'selected' : ''; ?>>Completed</option>
-            </select>
-          </label>
-        </div>
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label fw-medium">Course</label>
+              <select class="form-select" name="course_id" required>
+                <option value="">Select a course</option>
+                <?php foreach ($courses as $course): ?>
+                  <option
+                    value="<?php echo (int) $course['id']; ?>"
+                    <?php echo $task_course_id === (int) $course['id'] ? 'selected' : ''; ?>
+                  >
+                    <?php echo htmlspecialchars($course['name']); ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-medium">Status</label>
+              <select class="form-select" name="task_status">
+                <option value="Not Completed" <?php echo $task_status === 'Not Completed' ? 'selected' : ''; ?>>Not Completed</option>
+                <option value="Completed" <?php echo $task_status === 'Completed' ? 'selected' : ''; ?>>Completed</option>
+              </select>
+            </div>
+          </div>
 
-        <div class="form-row">
-          <label class="labelled">
-            Deadline
-            <input
-              type="date"
-              name="task_due"
-              value="<?php echo htmlspecialchars($task_due); ?>"
-              required
-            >
-          </label>
-          <label class="labelled">
-            Priority
-            <select name="task_priority">
-              <option value="None" <?php echo $task_priority === 'None' ? 'selected' : ''; ?>>None</option>
-              <option value="Low" <?php echo $task_priority === 'Low' ? 'selected' : ''; ?>>Low</option>
-              <option value="Medium" <?php echo $task_priority === 'Medium' ? 'selected' : ''; ?>>Medium</option>
-              <option value="High" <?php echo $task_priority === 'High' ? 'selected' : ''; ?>>High</option>
-            </select>
-          </label>
-        </div>
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label fw-medium">Deadline</label>
+              <input class="form-control" type="date" name="task_due" value="<?php echo htmlspecialchars($task_due); ?>" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-medium">Priority</label>
+              <select class="form-select" name="task_priority">
+                <option value="None" <?php echo $task_priority === 'None' ? 'selected' : ''; ?>>None</option>
+                <option value="Low" <?php echo $task_priority === 'Low' ? 'selected' : ''; ?>>Low</option>
+                <option value="Medium" <?php echo $task_priority === 'Medium' ? 'selected' : ''; ?>>Medium</option>
+                <option value="High" <?php echo $task_priority === 'High' ? 'selected' : ''; ?>>High</option>
+              </select>
+            </div>
+          </div>
 
-        <label class="labelled">
-          Task Description
-          <textarea
-            name="task_desc"
-            placeholder="Task Description"
-          ><?php echo htmlspecialchars($task_desc); ?></textarea>
-        </label>
+          <div class="mb-3">
+            <label class="form-label fw-medium">Task Description</label>
+            <textarea class="form-control" name="task_desc" placeholder="Task Description" rows="5"><?php echo htmlspecialchars($task_desc); ?></textarea>
+          </div>
 
-        <div class="form-actions">
-          <button class="solid" type="submit">Save Changes</button>
-        </div>
-      </form>
-    <?php endif; ?>
-  </section>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-primary" type="submit">Save Changes</button>
+          </div>
+        </form>
+      <?php endif; ?>
+    </div>
+  </div>
 </main>
 <?php
 render_shell_close();

@@ -13,16 +13,31 @@ render_sidebar_toggle();
 <main class="main">
   <a class="crumb" href="home.php">&lt; Back to Home</a>
   <h2>Completed</h2>
-  <p class="summary">You have <strong><?php echo count($completed); ?></strong> completed tasks.</p>
+  <p class="text-muted mb-3">You have <strong class="text-dark"><?php echo count($completed); ?></strong> completed tasks.</p>
 
-  <section class="panel">
-    <div class="task-grid">
-      <?php foreach ($completed as $task): ?>
-        <?php $course = find_course($courses, $task['course_id']); ?>
-        <?php render_task_row($task, $course ? $course['name'] : 'Course'); ?>
-      <?php endforeach; ?>
+  <div class="card">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Task</th>
+              <th>Course</th>
+              <th>Deadline</th>
+              <th>Priority</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($completed as $task): ?>
+              <?php $course = find_course($courses, $task['course_id']); ?>
+              <?php render_task_row($task, $course ? $course['name'] : 'Course'); ?>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </section>
+  </div>
 </main>
 <?php
 render_shell_close();

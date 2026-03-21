@@ -26,29 +26,37 @@ render_sidebar('', $courses);
 render_sidebar_toggle();
 ?>
 <main class="main">
-  <div class="course-header">
+  <div class="d-flex justify-content-between align-items-center mb-4">
     <a class="crumb" href="course.php?id=<?php echo $course ? (int) $course['id'] : 0; ?>">&lt; Back to Course</a>
-    <a class="link-button" href="task-edit.php?id=<?php echo (int) $task['id']; ?>">
-      Edit Task
-    </a>
+    <a class="btn btn-outline-secondary btn-sm" href="task-edit.php?id=<?php echo (int) $task['id']; ?>">Edit Task</a>
   </div>
 
   <h2><?php echo htmlspecialchars($task['name']); ?></h2>
 
-  <section class="task-detail">
-    <div class="detail-grid">
-      <div class="detail-item"><strong>Course</strong><span><?php echo htmlspecialchars($course ? $course['name'] : '—'); ?></span></div>
-      <div class="detail-item"><strong>Name</strong><span><?php echo htmlspecialchars($task['name']); ?></span></div>
-      <div class="detail-item"><strong>Deadline</strong><span><?php echo htmlspecialchars($task['deadline']); ?></span></div>
-      <div class="detail-item"><strong>Status</strong><span><?php echo htmlspecialchars($task['status']); ?></span></div>
-      <div class="detail-item"><strong>Priority</strong><span><?php echo htmlspecialchars($task['priority']); ?></span></div>
+  <div class="row g-3 mb-4">
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body p-0">
+          <table class="table table-sm mb-0">
+            <tbody>
+              <tr><th class="text-muted fw-normal ps-3">Course</th><td><?php echo htmlspecialchars($course ? $course['name'] : '—'); ?></td></tr>
+              <tr><th class="text-muted fw-normal ps-3">Name</th><td><?php echo htmlspecialchars($task['name']); ?></td></tr>
+              <tr><th class="text-muted fw-normal ps-3">Deadline</th><td><?php echo htmlspecialchars($task['deadline']); ?></td></tr>
+              <tr><th class="text-muted fw-normal ps-3">Status</th><td><?php echo htmlspecialchars($task['status']); ?></td></tr>
+              <tr><th class="text-muted fw-normal ps-3">Priority</th><td><?php echo htmlspecialchars($task['priority']); ?></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <section class="panel">
-      <h3>Task Description</h3>
-      <p><?php echo htmlspecialchars($task['description']); ?></p>
-    </section>
-  </section>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Task Description</h5>
+      <p class="card-text text-muted"><?php echo nl2br(htmlspecialchars($task['description'])); ?></p>
+    </div>
+  </div>
 </main>
 <?php
 render_shell_close();

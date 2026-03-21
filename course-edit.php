@@ -62,40 +62,33 @@ render_sidebar_toggle();
 ?>
 <main class="main">
   <a class="crumb" href="javascript:history.back()">&times; Cancel</a>
-  <h2 class="form-title">Edit Course</h2>
+  <h2>Edit Course</h2>
 
-  <section class="panel form-panel">
-    <?php if (!empty($errors)): ?>
-      <p style="margin-bottom:16px; color:#b91c1c; text-align:left; font-size:14px;">
-        <?php echo htmlspecialchars(implode(' ', $errors)); ?>
-      </p>
-    <?php endif; ?>
+  <div class="card" style="max-width: 600px;">
+    <div class="card-body">
+      <?php if (!empty($errors)): ?>
+        <div class="alert alert-danger py-2"><?php echo htmlspecialchars(implode(' ', $errors)); ?></div>
+      <?php endif; ?>
 
-    <?php if ($course): ?>
-      <form class="form-grid" method="post" action="course-edit.php?id=<?php echo (int) $courseId; ?>">
-        <label class="labelled">
-          Course Name
-          <input
-            type="text"
-            name="course_name"
-            placeholder="Course Name"
-            value="<?php echo htmlspecialchars($course_name); ?>"
-            required
-          >
-        </label>
-        <label class="labelled">
-          Course Description
-          <textarea
-            name="course_desc"
-            placeholder="Course Description"
-          ><?php echo htmlspecialchars($course_desc); ?></textarea>
-        </label>
-        <div class="form-actions">
-          <button class="solid" type="submit">Save Changes</button>
-        </div>
-      </form>
-    <?php endif; ?>
-  </section>
+      <?php if ($course): ?>
+        <form method="post" action="course-edit.php?id=<?php echo (int) $courseId; ?>">
+          <div class="mb-3">
+            <label class="form-label fw-medium">Course Name</label>
+            <input class="form-control" type="text" name="course_name" placeholder="Course Name" value="<?php echo htmlspecialchars($course_name); ?>" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-medium">Course Description</label>
+            <textarea class="form-control" name="course_desc" placeholder="Course Description" rows="4"><?php echo htmlspecialchars($course_desc); ?></textarea>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-primary" type="submit">Save Changes</button>
+          </div>
+        </form>
+      <?php endif; ?>
+    </div>
+  </div>
 </main>
 <?php
 render_shell_close();
