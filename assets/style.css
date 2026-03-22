@@ -90,7 +90,7 @@ h1, h2, h3, h4, h5, .navbar-brand {
 
 /* ── Login page gradient background ── */
 .login-bg {
-  background-image: url('assets/mesh.png');
+  background: url('mesh.png'), radial-gradient(circle at top left, #72efdd 0, #48bfe3 36%, #6930c3 100%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
