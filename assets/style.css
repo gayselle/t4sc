@@ -11,6 +11,7 @@
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 18px;
 }
 
 h1, h2, h3, h4, h5, .navbar-brand {
@@ -38,7 +39,7 @@ h1, h2, h3, h4, h5, .navbar-brand {
 /* ── Sidebar nav states ── */
 .sidebar .nav-link {
   color: #374151;
-  font-size: 14.5px;
+  font-size: 16px;
   transition: background .15s, color .15s;
 }
 
@@ -77,7 +78,7 @@ h1, h2, h3, h4, h5, .navbar-brand {
   border: 1px solid #fca5a5;
   background: #fef2f2;
   color: #b91c1c;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   margin-left: 8px;
 }
@@ -100,9 +101,10 @@ h1, h2, h3, h4, h5, .navbar-brand {
   text-underline-offset: 4px;
 }
 
-/* ── Hide dropdown arrow on + New button ── */
-.dropdown-toggle::after {
-  display: none;
+/* ── Form elements sizing ── */
+input, select, textarea, button {
+  font-size: 16px;
+  padding: 12px 16px;
 }
 
 /* ── end of stylesheet ── */
@@ -179,7 +181,7 @@ button {
   justify-content: space-between;
   align-items: center;
   gap: 24px;
-  padding: 20px 32px;
+  padding: 24px 36px;
   background: var(--panel);
   border-bottom: 1px solid var(--line);
   position: sticky;
@@ -189,7 +191,7 @@ button {
 
 .logo {
   font-weight: 700;
-  font-size: 20.8px;
+  font-size: 24px;
   letter-spacing: 0.02em;
 }
 
@@ -214,7 +216,7 @@ button {
 
 .sidebar {
   border-right: 1px solid var(--line);
-  padding: 24px 20px;
+  padding: 28px 24px;
   background: var(--panel);
 }
 
@@ -222,7 +224,7 @@ button {
   display: inline-block;
   padding: 10px 20px;
   border-radius: 10px;
-  font-size: 14.4px;
+  font-size: 16px;
   font-weight: 500;
   color: #dc2626;
   border: 1px solid #fca5a5;
@@ -257,7 +259,7 @@ button {
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  font-size: 11.52px;
+  font-size: 12px;
   color: var(--muted);
 }
 
@@ -288,7 +290,7 @@ button {
   display: block;
   padding: 8.8px 11.2px;
   border-radius: 8px;
-  font-size: 14.4px;
+  font-size: 16px;
 }
 
 .sidebar-new-menu a:hover {
@@ -338,7 +340,7 @@ button {
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--panel);
-  font-size: 14.4px;
+  font-size: 16px;
   transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -350,7 +352,7 @@ button {
 }
 
 .main {
-  padding: 40px 48px 64px;
+  padding: 48px 56px 72px;
   animation: fadeIn 0.4s ease;
 }
 
@@ -405,7 +407,7 @@ p {
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 16px;
-  padding: 32px;
+  padding: 36px;
   box-shadow: var(--shadow);
 }
 
@@ -426,7 +428,7 @@ p {
   border: 1px solid #fca5a5;
   background: #fef2f2;
   color: #b91c1c;
-  font-size: 12.8px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -463,7 +465,7 @@ p {
   border-radius: 12px;
   background: #f9fafb;
   text-align: left;
-  font-size: 15.2px;
+  font-size: 16px;
 }
 
 .task-status-toggle {
@@ -567,7 +569,7 @@ p {
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 7.2px 14.4px;
-  font-size: 13.6px;
+  font-size: 14px;
 }
 
 .toolbar {
@@ -648,7 +650,7 @@ p {
 .course-card {
   border: 1px solid var(--line);
   border-radius: 16px;
-  padding: 24px;
+  padding: 28px;
   background: var(--panel);
   display: grid;
   gap: 19.2px;
@@ -715,7 +717,7 @@ textarea {
   border-radius: 12px;
   border: 1px solid var(--line);
   box-shadow: 0 18px 45px rgba(15, 23, 42, 0.1);
-  padding: 36px 36px 32px;
+  padding: 40px 40px 36px;
   text-align: center;
 }
 
@@ -744,7 +746,7 @@ textarea {
 }
 
 .login-label {
-  font-size: 12.8px;
+  font-size: 14px;
   font-weight: 500;
   color: #374151;
 }
@@ -799,7 +801,7 @@ textarea {
   background: #f9fafb;
   display: flex;
   justify-content: space-between;
-  font-size: 15.2px;
+  font-size: 16px;
 }
 
 .detail-item span {
