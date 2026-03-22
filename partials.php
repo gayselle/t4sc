@@ -13,8 +13,11 @@ function render_head($title = 'T4SC') {
 }
 
 function render_topbar() {
-    echo "<nav class='navbar bg-white border-bottom sticky-top px-4'>\n";
-    echo "  <a class='navbar-brand fw-bold' href='home.php'>T4SC</a>\n";
+    echo "<nav class='navbar bg-white border-bottom sticky-top px-4' style='height: 64px;'>\n";
+    echo "  <a class='navbar-brand fw-bold d-flex align-items-center' href='home.php' style='color: #4f46e5; font-size: 20px;'>\n";
+    echo "    <img src='assets/logo.png' alt='T4SC Logo' style='height: 40px; margin-right: 8px;'>\n";
+    echo "    TASKS 4 SCHOOL\n";
+    echo "  </a>\n";
     echo "  <div class='d-flex gap-2'>\n";
     echo "    <a class='btn btn-outline-secondary btn-sm' href='settings.php'>Profile</a>\n";
     echo "  </div>\n";
@@ -28,7 +31,7 @@ function render_sidebar($active = 'home', $courses = [], $activeCourseId = 0) {
         'completed'     => ['label' => 'Completed',     'href' => 'completed.php'],
     ];
 
-    echo "<aside class='sidebar bg-white border-end p-3' style='width:240px;flex-shrink:0;min-height:calc(100vh - 56px);'>\n";
+    echo "<aside class='sidebar bg-white border-end p-3' style='width:240px;flex-shrink:0;min-height:calc(100vh - 64px);'>\n";
 
     echo "  <p class='text-uppercase text-muted fw-semibold mb-2 px-1' style='font-size:11px;letter-spacing:.07em;'>Dashboard</p>\n";
     echo "  <div class='dropdown mb-1'>\n";
