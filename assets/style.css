@@ -100,6 +100,10 @@ h1, h2, h3, h4, h5, .navbar-brand {
   text-underline-offset: 4px;
 }
 
+/* ── Hide dropdown arrow on + New button ── */
+.dropdown-toggle::after {
+  display: none;
+}
 
 /* ── end of stylesheet ── */
 
