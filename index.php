@@ -27,12 +27,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 
-render_head('Welcome to T4SC');
+render_head('Welcome to TASKS 4 SCHOOL');
 ?>
 
 <div class="min-vh-100 d-flex align-items-center justify-content-center login-bg py-4">
   <main class="card shadow p-4 p-md-5" style="width:min(480px,100%)">
-    <h1 class="h3 text-center fw-bold mb-2">Welcome to T4SC</h1>
+    <div class="text-center mb-3">
+      <img src="assets/logo.png" alt="T4SC Logo" class="mb-3" style="max-width: 120px; height: auto;">
+    </div>
+    <h1 class="h3 text-center fw-bold mb-2">Welcome to<br>TASKS 4 SCHOOL</h1>
     <p class="text-muted text-center mb-4" style="font-size:14px;">
       Stay on top of tasks, classes, and deadlines with a focused workspace designed for students.
     </p>

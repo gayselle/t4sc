@@ -90,7 +90,10 @@ h1, h2, h3, h4, h5, .navbar-brand {
 
 /* ── Login page gradient background ── */
 .login-bg {
-  background: radial-gradient(circle at top left, #eef2ff 0, #e5e7eb 36%, #f3f4f6 100%);
+  background-image: url('assets/mesh.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* ── Course label hover ── */
