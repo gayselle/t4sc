@@ -1,4 +1,13 @@
 <?php
+/**
+ * Main Dashboard Page
+ *
+ * Displays personalized task overview with filtering and sorting capabilities.
+ * Shows tasks due today, overdue count, and all tasks with course/status filters.
+ * Supports sorting by priority (High→Medium→Low→None) or deadline.
+ * Uses array_filter and usort for client-side data manipulation.
+ */
+
 session_start();
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/data.php';

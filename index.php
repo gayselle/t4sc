@@ -1,4 +1,13 @@
 <?php
+/**
+ * Login Page and Authentication Handler
+ *
+ * This is the main entry point for user authentication. Displays a login form
+ * and processes POST requests to authenticate users against the database.
+ * On successful login, sets session variables and redirects to home.php.
+ * Uses password_verify() for secure password comparison.
+ */
+
 session_start();
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/partials.php';

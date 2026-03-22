@@ -1,4 +1,12 @@
 <?php
+/**
+ * Create New Course Page
+ *
+ * Provides a form for creating new courses with name and description.
+ * Inserts course into database and redirects to course overview on success.
+ * Form persists entered values on validation failure.
+ */
+
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';

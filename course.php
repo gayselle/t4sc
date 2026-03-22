@@ -1,4 +1,12 @@
 <?php
+/**
+ * Course Overview Page
+ *
+ * Displays course details and all tasks belonging to the course.
+ * Provides edit and delete actions for the course.
+ * Shows task table with status, name, deadline, and priority.
+ */
+
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';
 require_login();

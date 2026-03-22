@@ -1,4 +1,12 @@
 <?php
+/**
+ * Edit Existing Task Page
+ *
+ * Allows editing of task details with pre-filled form values.
+ * Updates task in database with user ownership verification.
+ * Redirects to task detail page on success.
+ */
+
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';

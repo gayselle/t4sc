@@ -1,4 +1,21 @@
 <?php
+/**
+ * Database Connection Configuration
+ *
+ * This file establishes a PDO connection to the MySQL database using credentials
+ * loaded from the db.env file. It provides a global $pdo object for database operations
+ * throughout the application.
+ *
+ * Environment Variables (from db.env):
+ * - DB_HOST: Database server hostname (default: localhost)
+ * - DB_PORT: Database server port (default: 3306)
+ * - DB_NAME: Database name (default: railway)
+ * - DB_USER: Database username (default: root)
+ * - DB_PASSWORD: Database password (default: empty)
+ *
+ * @global PDO $pdo Global PDO database connection object
+ */
+
 // Load environment variables from db.env file in the project root
 $envPath = __DIR__ . '/db.env';
 $env = [];

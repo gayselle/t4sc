@@ -1,4 +1,12 @@
 <?php
+/**
+ * Edit Existing Course Page
+ *
+ * Allows editing of course name and description with pre-filled form values.
+ * Updates course in database with user ownership verification.
+ * Redirects to course overview page on success.
+ */
+
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';

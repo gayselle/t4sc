@@ -1,4 +1,13 @@
 <?php
+/**
+ * User Profile Settings Page
+ *
+ * Allows users to update their display name with validation to prevent
+ * duplicates. Features a toggle between read/edit modes with JavaScript
+ * for smooth UX. Includes logout functionality and success notifications.
+ * Session is kept in sync after updates for immediate UI changes.
+ */
+
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';
 require_login();

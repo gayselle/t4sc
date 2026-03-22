@@ -1,4 +1,13 @@
 <?php
+/**
+ * User Registration Page
+ *
+ * Handles new user account creation with form validation and secure password
+ * hashing. Validates username, email format, and password requirements.
+ * On successful registration, redirects to login page.
+ * Uses PASSWORD_DEFAULT for bcrypt hashing and catches duplicate entry errors.
+ */
+
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/partials.php';
 

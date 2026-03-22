@@ -1,4 +1,12 @@
 <?php
+/**
+ * Create New Task Page
+ *
+ * Provides a form for creating new tasks with validation for required fields.
+ * Inserts task into database and redirects to task detail page on success.
+ * Form persists entered values on validation failure.
+ */
+
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';

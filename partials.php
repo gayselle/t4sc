@@ -1,5 +1,18 @@
 <?php
+/**
+ * HTML Rendering Functions for UI Components
+ *
+ * This file contains functions for rendering consistent HTML components across
+ * the application, including headers, navigation, sidebars, and task rows.
+ * Uses Bootstrap 5.3.3 for styling and responsive design.
+ */
+
 function render_head($title = 'T4SC') {
+    /**
+     * Render HTML document head with Bootstrap CSS and custom styles
+     *
+     * @param string $title Page title to display in browser tab
+     */
     echo "<!doctype html>\n";
     echo "<html lang='en'>\n";
     echo "<head>\n";
@@ -13,6 +26,12 @@ function render_head($title = 'T4SC') {
 }
 
 function render_topbar() {
+    /**
+     * Render sticky navigation bar with logo and profile link
+     *
+     * Displays the T4SC logo and brand name, plus a Profile button
+     * linking to settings.php. Fixed height of 64px.
+     */
     echo "<nav class='navbar bg-white border-bottom sticky-top px-4' style='height: 64px;'>\n";
     echo "  <a class='navbar-brand fw-bold d-flex align-items-center' href='home.php' style='color: #4f46e5; font-size: 20px;'>\n";
     echo "    <img src='assets/logo.png' alt='T4SC Logo' style='height: 40px; margin-right: 8px;'>\n";
@@ -25,6 +44,13 @@ function render_topbar() {
 }
 
 function render_sidebar($active = 'home', $courses = [], $activeCourseId = 0) {
+    /**
+     * Render left sidebar with navigation and course list
+     *
+     * @param string $active Active navigation item ('home', 'not-completed', 'completed')
+     * @param array $courses Array of user's courses
+     * @param int $activeCourseId ID of currently active course (for highlighting)
+     */
     $navItems = [
         'home'          => ['label' => 'Home',          'href' => 'home.php'],
         'not-completed' => ['label' => 'Not Completed', 'href' => 'not-completed.php'],
@@ -62,19 +88,41 @@ function render_sidebar($active = 'home', $courses = [], $activeCourseId = 0) {
 }
 
 function render_shell_open() {
+    /**
+     * Open the main flex container div
+     *
+     * Starts the d-flex div that contains sidebar and main content
+     */
     echo "<div class='d-flex'>\n";
 }
 
 function render_shell_close() {
+    /**
+     * Close the main flex container and include Bootstrap JS
+     *
+     * Closes the d-flex div and loads Bootstrap JavaScript bundle
+     */
     echo "</div>\n";
     echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>\n";
 }
 
 function render_sidebar_toggle() {
+    /**
+     * Placeholder for sidebar toggle functionality
+     *
+     * Currently a no-op as Bootstrap handles the "+ New" dropdown
+     * toggle automatically via data-bs-toggle attribute.
+     */
     // No-op: Bootstrap's dropdown handles the "+ New" toggle via data-bs-toggle automatically.
 }
 
 function render_task_row($task, $courseName = '') {
+    /**
+     * Render a table row for a task with all task details
+     *
+     * @param array $task Task data array with id, name, deadline, priority, status
+     * @param string $courseName Name of the course this task belongs to
+     */
     $name     = $task['name'];
     $deadline = $task['deadline'];
     $priority = $task['priority'];

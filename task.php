@@ -1,4 +1,12 @@
 <?php
+/**
+ * Task Detail View Page
+ *
+ * Displays comprehensive details for a single task including name, course,
+ * deadline, status, priority, and description. Provides edit and delete
+ * actions with confirmation dialog. Redirects to home if task not found.
+ */
+
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';
 require_login();

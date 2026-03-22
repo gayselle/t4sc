@@ -1,4 +1,12 @@
 <?php
+/**
+ * Task Status Toggle Handler
+ *
+ * Toggles task completion status via POST request from checkbox forms.
+ * Includes security measures: user ownership verification and open redirect protection.
+ * Redirects back to the referring page after update.
+ */
+
 session_start();
 require_once __DIR__ . '/db.php';
 

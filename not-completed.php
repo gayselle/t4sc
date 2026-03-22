@@ -1,4 +1,12 @@
 <?php
+/**
+ * Pending Tasks View
+ *
+ * Displays all tasks with 'Not Completed' status in a table format.
+ * Shows task count and provides navigation back to home dashboard.
+ * Uses tasks_by_status() utility function for filtering.
+ */
+
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/partials.php';
 require_login();
