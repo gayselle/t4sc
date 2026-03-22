@@ -28,7 +28,7 @@ function render_sidebar($active = 'home', $courses = [], $activeCourseId = 0) {
         'completed'     => ['label' => 'Completed',     'href' => 'completed.php'],
     ];
 
-    echo "<aside class='bg-white border-end p-3' style='width:240px;flex-shrink:0;min-height:calc(100vh - 56px);'>\n";
+    echo "<aside class='sidebar bg-white border-end p-3' style='width:240px;flex-shrink:0;min-height:calc(100vh - 56px);'>\n";
 
     echo "  <p class='text-uppercase text-muted fw-semibold mb-2 px-1' style='font-size:11px;letter-spacing:.07em;'>Dashboard</p>\n";
     echo "  <div class='dropdown mb-1'>\n";
@@ -97,6 +97,13 @@ function render_task_row($task, $courseName = '') {
     $checked      = $status === 'Completed' ? "checked='checked'" : '';
 
     echo "<tr class='$rowClass'>\n";
+    echo "  <td class='text-center'>\n";
+    echo "    <form method='post' action='task-toggle.php'>\n";
+    echo "      <input type='hidden' name='task_id' value='$taskId'>\n";
+    echo "      <input type='hidden' name='redirect' value=\"$currentUrl\">\n";
+    echo "      <input class='form-check-input' type='checkbox' name='completed' value='1' $checked onchange='this.form.submit()' id='task-check-$taskId'>\n";
+    echo "    </form>\n";
+    echo "  </td>\n";
     echo "  <td><a href='task.php?id=$taskId' class='fw-medium text-decoration-none link-dark'>" . htmlspecialchars($name) . "</a></td>\n";
     echo "  <td class='text-muted'>" . htmlspecialchars($courseName) . "</td>\n";
     echo "  <td class='$deadlineCls'>" . htmlspecialchars($deadline);
@@ -105,16 +112,6 @@ function render_task_row($task, $courseName = '') {
     }
     echo "</td>\n";
     echo "  <td><span class='badge $badgeClass'>" . htmlspecialchars($priority) . "</span></td>\n";
-    echo "  <td>\n";
-    echo "    <form method='post' action='task-toggle.php'>\n";
-    echo "      <input type='hidden' name='task_id' value='$taskId'>\n";
-    echo "      <input type='hidden' name='redirect' value=\"$currentUrl\">\n";
-    echo "      <div class='form-check mb-0'>\n";
-    echo "        <input class='form-check-input' type='checkbox' name='completed' value='1' $checked onchange='this.form.submit()' id='task-check-$taskId'>\n";
-    echo "        <label class='form-check-label' for='task-check-$taskId'>" . htmlspecialchars($status) . "</label>\n";
-    echo "      </div>\n";
-    echo "    </form>\n";
-    echo "  </td>\n";
     echo "</tr>\n";
 }
 ?>

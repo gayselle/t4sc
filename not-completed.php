@@ -19,7 +19,7 @@ render_sidebar_toggle();
     <div class="card-body p-0">
       <table class="table table-hover align-middle mb-0">
         <thead class="table-light">
-          <tr><th>Task</th><th>Course</th><th>Deadline</th><th>Priority</th><th>Status</th></tr>
+          <tr><th style="width: 80px;">Status</th><th>Task</th><th>Course</th><th>Deadline</th><th>Priority</th></tr>
         </thead>
         <tbody>
           <?php foreach ($pending as $task): ?>
