@@ -50,7 +50,6 @@ render_sidebar('', $courses);
 render_sidebar_toggle();
 ?>
 <main class="flex-grow-1 p-4 p-md-5 main-content">
-  <a class="text-muted text-decoration-none mb-3 d-inline-block" href="javascript:history.back()">&times; Cancel</a>
   <h2 class="mb-4">New Course</h2>
 
   <div class="card shadow-sm" style="max-width:680px;">
@@ -69,6 +68,7 @@ render_sidebar_toggle();
           <textarea class="form-control" name="course_desc" placeholder="Course Description" style="min-height:120px;"><?php echo htmlspecialchars($course_desc); ?></textarea>
         </div>
         <div class="d-flex justify-content-end">
+          <a href="javascript:history.back()" class="btn btn-outline-danger me-2">Cancel</a>
           <button type="submit" class="btn btn-primary">Save</button>
         </div>
       </form>
