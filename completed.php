@@ -16,12 +16,16 @@ render_sidebar_toggle();
   <p class="summary">You have <strong><?php echo count($completed); ?></strong> completed tasks.</p>
 
   <section class="panel">
-    <div class="task-grid">
-      <?php foreach ($completed as $task): ?>
-        <?php $course = find_course($courses, $task['course_id']); ?>
-        <?php render_task_row($task, $course ? $course['name'] : 'Course'); ?>
-      <?php endforeach; ?>
-    </div>
+    <?php if (count($completed) === 0): ?>
+      <p class="empty-state">No tasks to view</p>
+    <?php else: ?>
+      <div class="task-grid">
+        <?php foreach ($completed as $task): ?>
+          <?php $course = find_course($courses, $task['course_id']); ?>
+          <?php render_task_row($task, $course ? $course['name'] : 'Course'); ?>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
   </section>
 </main>
 <?php

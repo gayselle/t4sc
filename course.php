@@ -40,11 +40,15 @@ render_sidebar_toggle();
   <p><?php echo htmlspecialchars($course['description']); ?></p>
 
   <section class="panel" style="margin-top: 2rem;">
-    <div class="task-grid">
-      <?php foreach ($courseTasks as $task): ?>
-        <?php render_task_row($task, $course['name']); ?>
-      <?php endforeach; ?>
-    </div>
+    <?php if (count($courseTasks) === 0): ?>
+      <p class="empty-state">No tasks to view</p>
+    <?php else: ?>
+      <div class="task-grid">
+        <?php foreach ($courseTasks as $task): ?>
+          <?php render_task_row($task, $course['name']); ?>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
     <div class="panel-actions">
       <a class="link-button" href="task-new.php">
         <span>+</span> New Task

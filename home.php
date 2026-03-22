@@ -70,12 +70,16 @@ render_sidebar_toggle();
   </p>
 
   <section class="panel summary">
-    <div class="task-grid">
-      <?php foreach ($dueToday as $task): ?>
-        <?php $course = find_course($courses, $task['course_id']); ?>
-        <?php render_task_row($task, $course ? $course['name'] : 'Course'); ?>
-      <?php endforeach; ?>
-    </div>
+    <?php if (count($dueToday) === 0): ?>
+      <p class="empty-state">No tasks to view</p>
+    <?php else: ?>
+      <div class="task-grid">
+        <?php foreach ($dueToday as $task): ?>
+          <?php $course = find_course($courses, $task['course_id']); ?>
+          <?php render_task_row($task, $course ? $course['name'] : 'Course'); ?>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
   </section>
 
   <h2>Tasks</h2>
@@ -114,12 +118,16 @@ render_sidebar_toggle();
   </form>
 
   <section class="panel" style="margin-top:24px;">
-    <div class="task-grid">
-      <?php foreach ($filteredTasks as $task):
-        $course = find_course($courses, $task['course_id']);
-        render_task_row($task, $course ? $course['name'] : '');
-      endforeach; ?>
-    </div>
+    <?php if (count($filteredTasks) === 0): ?>
+      <p class="empty-state">No tasks to view</p>
+    <?php else: ?>
+      <div class="task-grid">
+        <?php foreach ($filteredTasks as $task):
+          $course = find_course($courses, $task['course_id']);
+          render_task_row($task, $course ? $course['name'] : '');
+        endforeach; ?>
+      </div>
+    <?php endif; ?>
   </section>
 </main>
 <?php

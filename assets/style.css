@@ -309,6 +309,13 @@ p {
   color: var(--ink);
 }
 
+.empty-state {
+  color: var(--muted);
+  text-align: center;
+  font-size: 15.2px;
+  margin: 0;
+}
+
 .overdue-count-badge {
   display: inline-flex;
   align-items: center;
@@ -591,6 +598,7 @@ textarea {
   display: flex;
   justify-content: flex-end;
   margin-top: 16px;
+  gap: 12px;
 }
 
 .login-shell {

@@ -69,7 +69,6 @@ render_sidebar('', $courses);
 render_sidebar_toggle();
 ?>
 <main class="main">
-  <a class="crumb" href="javascript:history.back()">&times; Cancel</a>
   <h2 class="form-title">New Task</h2>
 
   <section class="panel form-panel">
@@ -147,6 +146,7 @@ render_sidebar_toggle();
 
       <div class="form-actions">
         <button class="solid" type="submit">Save</button>
+        <button class="delete-btn" type="button" onclick="javascript:history.back()">Cancel</button>
       </div>
     </form>
   </section>

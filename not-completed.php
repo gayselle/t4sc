@@ -16,12 +16,16 @@ render_sidebar_toggle();
   <p class="summary">You have <strong><?php echo count($pending); ?></strong> uncompleted tasks.</p>
 
   <section class="panel">
-    <div class="task-grid">
-      <?php foreach ($pending as $task): ?>
-        <?php $course = find_course($courses, $task['course_id']); ?>
-        <?php render_task_row($task, $course ? $course['name'] : 'Course'); ?>
-      <?php endforeach; ?>
-    </div>
+    <?php if (count($pending) === 0): ?>
+      <p class="empty-state">No tasks to view</p>
+    <?php else: ?>
+      <div class="task-grid">
+        <?php foreach ($pending as $task): ?>
+          <?php $course = find_course($courses, $task['course_id']); ?>
+          <?php render_task_row($task, $course ? $course['name'] : 'Course'); ?>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
   </section>
 </main>
 <?php
