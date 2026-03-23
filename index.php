@@ -59,9 +59,12 @@ render_head('Welcome to TASKS 4 SCHOOL');
         <input id="username" name="username" type="text" class="form-control" placeholder="Enter your username"
           value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>" required>
       </div>
-      <div class="mb-3">
+      <div class="mb-3" x-data="{ show: false }">
         <label class="form-label fw-medium" for="password">Password</label>
-        <input id="password" name="password" type="password" class="form-control" placeholder="Enter your password" required>
+        <div class="input-group">
+          <input id="password" name="password" :type="show ? 'text' : 'password'" class="form-control" placeholder="Enter your password" required>
+          <button class="btn btn-outline-secondary" type="button" @click="show = !show" tabindex="-1" x-text="show ? 'Hide' : 'Show'"></button>
+        </div>
       </div>
       <button type="submit" class="btn btn-primary w-100 py-2 mt-1">Log In</button>
     </form>

@@ -38,10 +38,19 @@ render_sidebar_toggle();
     <a class="text-muted text-decoration-none" href="course.php?id=<?php echo $course ? (int) $course['id'] : 0; ?>">&lt; Back to Course</a>
     <div class="d-flex gap-2">
       <a class="btn btn-outline-secondary btn-sm" href="task-edit.php?id=<?php echo (int) $task['id']; ?>">Edit Task</a>
-      <form action="task-delete.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this task? This cannot be undone.');" style="display:inline;">
-        <input type="hidden" name="task_id" value="<?php echo (int) $task['id']; ?>">
-        <button type="submit" class="btn btn-danger btn-sm">Delete Task</button>
-      </form>
+      <div x-data="{ confirm: false }" class="d-inline-flex align-items-center gap-2">
+        <button type="button" class="btn btn-danger btn-sm" x-show="!confirm" @click="confirm = true">Delete Task</button>
+        <template x-if="confirm">
+          <span class="d-inline-flex align-items-center gap-2">
+            <span class="text-danger fw-medium" style="font-size:14px;">Sure?</span>
+            <form action="task-delete.php" method="POST" style="display:inline;">
+              <input type="hidden" name="task_id" value="<?php echo (int) $task['id']; ?>">
+              <button type="submit" class="btn btn-danger btn-sm">Yes, Delete</button>
+            </form>
+            <button type="button" class="btn btn-outline-secondary btn-sm" @click="confirm = false">Cancel</button>
+          </span>
+        </template>
+      </div>
     </div>
   </div>
 

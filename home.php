@@ -99,6 +99,8 @@ render_sidebar_toggle();
   </div>
 
   <h2 class="mb-3">All Tasks</h2>
+  <div x-data="{ search: '' }" x-effect="document.querySelectorAll('#all-tasks-body tr[data-search]').forEach(r => r.style.display = r.dataset.search.includes(search.toLowerCase()) ? '' : 'none')">
+  <input x-model="search" type="text" class="form-control mb-3" placeholder="Search tasks by name or course...">
   <form class="row g-3 align-items-end mb-4" method="GET" action="home.php">
     <div class="col-auto">
       <label class="form-label mb-1 fw-medium">Course</label>
@@ -138,7 +140,7 @@ render_sidebar_toggle();
         <thead class="table-light">
           <tr><th style="width: 80px;">Status</th><th>Task</th><th>Course</th><th>Deadline</th><th>Priority</th></tr>
         </thead>
-        <tbody>
+        <tbody id="all-tasks-body">
           <?php foreach ($filteredTasks as $task):
             $course = find_course($courses, $task['course_id']);
             render_task_row($task, $course ? $course['name'] : '');
@@ -149,6 +151,7 @@ render_sidebar_toggle();
         </tbody>
       </table>
     </div>
+  </div>
   </div>
 </main>
 <?php

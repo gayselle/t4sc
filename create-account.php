@@ -75,9 +75,12 @@ render_head('Create Account | T4SC');
         <input id="signup-email" name="email" type="email" class="form-control" placeholder="you@example.com"
           value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>" required>
       </div>
-      <div class="mb-3">
+      <div class="mb-3" x-data="{ show: false }">
         <label class="form-label fw-medium" for="signup-password">Password</label>
-        <input id="signup-password" name="password" type="password" class="form-control" placeholder="Create a password" required>
+        <div class="input-group">
+          <input id="signup-password" name="password" :type="show ? 'text' : 'password'" class="form-control" placeholder="Create a password" required>
+          <button class="btn btn-outline-secondary" type="button" @click="show = !show" tabindex="-1" x-text="show ? 'Hide' : 'Show'"></button>
+        </div>
       </div>
       <button type="submit" class="btn btn-primary w-100 py-2 mt-1">Create Account</button>
     </form>

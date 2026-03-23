@@ -86,9 +86,11 @@ render_sidebar_toggle();
       <?php endif; ?>
 
       <form method="post" action="task-new.php">
-        <div class="mb-3">
-          <label class="form-label fw-medium">Task Name</label>
-          <input type="text" class="form-control" name="task_name" placeholder="Task Name" value="<?php echo htmlspecialchars($task_name); ?>" required>
+        <div class="mb-3" x-data="{ count: <?php echo strlen($task_name); ?> }">
+          <label class="form-label fw-medium d-flex justify-content-between">
+            Task Name <small class="text-muted fw-normal" x-text="count + '/100'"></small>
+          </label>
+          <input type="text" class="form-control" name="task_name" placeholder="Task Name" maxlength="100" value="<?php echo htmlspecialchars($task_name); ?>" @input="count = $el.value.length" required>
         </div>
 
         <div class="row g-3 mb-3">

@@ -21,6 +21,7 @@ function render_head($title = 'T4SC') {
     echo "  <title>" . $title . "</title>\n";
     echo "  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css'>\n";
     echo "  <link rel='stylesheet' href='assets/style.css?v=3'>\n";
+    echo "  <script defer src='https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js'></script>\n";
     echo "</head>\n";
     echo "<body class='bg-light'>\n";
 }
@@ -53,7 +54,7 @@ function render_sidebar($active = 'home', $courses = [], $activeCourseId = 0) {
      */
     $navItems = [
         'home'          => ['label' => 'Home',          'href' => 'home.php'],
-        'not-completed' => ['label' => 'Not Completed', 'href' => 'not-completed.php'],
+        'not-completed' => ['label' => 'Not Completed', 'href' => 'not-completed.php'], //array of navigation items with keys for active state, labels, and href links
         'completed'     => ['label' => 'Completed',     'href' => 'completed.php'],
     ];
 
@@ -69,17 +70,17 @@ function render_sidebar($active = 'home', $courses = [], $activeCourseId = 0) {
     echo "  </div>\n";
 
     echo "  <nav class='nav flex-column gap-1 mb-4'>\n";
-    foreach ($navItems as $key => $item) {
-        $cls = $active === $key ? ' active fw-medium' : '';
+    foreach ($navItems as $key => $item) { //loop through navigation items to render links, applying 'active' class if the current item matches the $active parameter passed to the function
+        $cls = $active === $key ? ' active fw-medium' : ''; //Does the $active value passed into the function match the current $key?
         echo "    <a class='nav-link rounded px-3 py-2$cls' href='{$item['href']}'>{$item['label']}</a>\n";
     }
     echo "  </nav>\n";
 
     echo "  <p class='text-uppercase text-muted fw-semibold mb-2 px-1' style='font-size:11px;letter-spacing:.07em;'>Courses</p>\n";
     echo "  <nav class='nav flex-column gap-1'>\n";
-    foreach ($courses as $course) {
-        $name = htmlspecialchars($course['name']);
-        $cls  = ((int) $activeCourseId === (int) $course['id']) ? ' active fw-medium' : '';
+    foreach ($courses as $course) {//loop through user's courses to render links, applying 'active' class if the course ID matches $activeCourseId
+        $name = htmlspecialchars($course['name']);//Escape course name for safe HTML output
+        $cls  = ((int) $activeCourseId === (int) $course['id']) ? ' active fw-medium' : ''; //Does the $activeCourseId match the current course's ID?
         echo "    <a class='nav-link rounded px-3 py-2$cls' href='course.php?id={$course['id']}'>$name</a>\n";
     }
     echo "  </nav>\n";
@@ -93,7 +94,7 @@ function render_shell_open() {
      *
      * Starts the d-flex div that contains sidebar and main content
      */
-    echo "<div class='d-flex'>\n";
+    echo "<div class='d-flex'>\n"; 
 }
 
 function render_shell_close() {
@@ -123,7 +124,7 @@ function render_task_row($task, $courseName = '') {
      * @param array $task Task data array with id, name, deadline, priority, status
      * @param string $courseName Name of the course this task belongs to
      */
-    $name     = $task['name'];
+    $name     = $task['name']; 
     $deadline = $task['deadline'];
     $priority = $task['priority'];
     $status   = $task['status'];
@@ -139,15 +140,16 @@ function render_task_row($task, $courseName = '') {
         $badgeClass = 'badge-priority-none';
     }
 
-    $currentUrl   = htmlspecialchars($_SERVER['REQUEST_URI'] ?? 'home.php', ENT_QUOTES);
-    $today        = date('Y-m-d');
-    $isDateFormat = is_string($deadline) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $deadline) === 1;
-    $isOverdue    = $status !== 'Completed' && $isDateFormat && $deadline < $today;
-    $rowClass     = $isOverdue ? ' table-danger' : '';
-    $deadlineCls  = $isOverdue ? ' text-danger fw-semibold' : ' text-muted';
-    $checked      = $status === 'Completed' ? "checked='checked'" : '';
+    $currentUrl   = htmlspecialchars($_SERVER['REQUEST_URI'] ?? 'home.php', ENT_QUOTES); //Escape current URL for safe HTML output
+    $today        = date('Y-m-d'); //Get today's date in YYYY-MM-DD format
+    $isDateFormat = is_string($deadline) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $deadline) === 1; //Check if deadline is in valid date format
+    $isOverdue    = $status !== 'Completed' && $isDateFormat && $deadline < $today; //Determine if task is overdue (not completed, valid date format, and deadline before today)
+    $rowClass     = $isOverdue ? ' table-danger' : ''; // Apply 'table-danger' class to row if task is overdue
+    $deadlineCls  = $isOverdue ? ' text-danger fw-semibold' : ' text-muted'; // Apply red text and bold to deadline if overdue, otherwise muted text
+    $checked      = $status === 'Completed' ? "checked='checked'" : ''; // Check the checkbox if task is completed
+    $searchData   = htmlspecialchars(strtolower($name . ' ' . $courseName), ENT_QUOTES);
 
-    echo "<tr class='$rowClass'>\n";
+    echo "<tr class='$rowClass' data-search='$searchData'>\n";
     echo "  <td class='text-center'>\n";
     echo "    <form method='post' action='task-toggle.php'>\n";
     echo "      <input type='hidden' name='task_id' value='$taskId'>\n";
