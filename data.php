@@ -1,15 +1,14 @@
 <?php
-/**
- * Data Loading and Utility Functions
- *
- * This file loads user-specific courses and tasks from the database and provides
- * utility functions for filtering and searching the data arrays. It also includes
- * authentication helpers and demo user fallbacks.
- *
- * Global Variables:
- * - $courses: Array of user's courses with id, name, description
- * - $tasks: Array of user's tasks with id, name, course_id, deadline, priority, status, description
- * - $demoUser: Fallback user data for display purposes
+/*
+ Data Loading and Utility Functions
+ This file loads user-specific courses and tasks from the database and provides
+ utility functions for filtering and searching the data arrays. It also includes
+ authentication helpers and demo user fallbacks.
+ 
+ Global Variables:
+ - $courses: Array of user's courses with id, name, description
+ - $tasks: Array of user's tasks with id, name, course_id, deadline, priority, status, description
+ - $demoUser: Fallback user data for display purposes
  */
 
 require_once __DIR__ . '/db.php';
@@ -75,13 +74,6 @@ if ($currentUserId > 0) {
 }
 
 function find_course($courses, $id) {
-    /**
-     * Find a course by its ID in the courses array
-     *
-     * @param array $courses Array of course objects
-     * @param int $id Course ID to search for
-     * @return array|null Course object if found, null otherwise
-     */
     foreach ($courses as $course) {
         if ($course['id'] === $id) {
             return $course;
@@ -91,42 +83,34 @@ function find_course($courses, $id) {
 }
 
 function tasks_for_course($tasks, $courseId) {
-    /**
-     * Filter tasks by course ID
-     *
-     * @param array $tasks Array of task objects
-     * @param int $courseId Course ID to filter by
-     * @return array Array of tasks belonging to the specified course
-     */
-    return array_values(array_filter($tasks, function ($task) use ($courseId) {
-        return $task['course_id'] === $courseId;
-    }));
+    $filtered = []; // Initialize an empty list to store matches
+    foreach ($tasks as $task) {
+        // Check if the current task's course_id matches the one we want
+        if ($task['course_id'] === $courseId) {
+            $filtered[] = $task; // Add the matching task to our list
+        }
+    }
+    return $filtered; // Return the final list of matched tasks
 }
 
 function tasks_by_status($tasks, $status) {
-    /**
-     * Filter tasks by completion status
-     *
-     * @param array $tasks Array of task objects
-     * @param string $status Status to filter by ('Completed' or 'Not Completed')
-     * @return array Array of tasks with the specified status
-     */
-    return array_values(array_filter($tasks, function ($task) use ($status) {
-        return $task['status'] === $status;
-    }));
+    $filtered = [];
+    foreach ($tasks as $task) {
+        if ($task['status'] === $status) {
+            $filtered[] = $task;
+        }
+    }
+    return $filtered;
 }
 
 function tasks_due_today($tasks, $today) {
-    /**
-     * Filter tasks that are due today
-     *
-     * @param array $tasks Array of task objects
-     * @param string $today Today's date in YYYY-MM-DD format
-     * @return array Array of tasks with deadline matching today
-     */
-    return array_values(array_filter($tasks, function ($task) use ($today) {
-        return $task['deadline'] === $today;
-    }));
+    $filtered = [];
+    foreach ($tasks as $task) {
+        if ($task['deadline'] === $today) {
+            $filtered [] = $task;
+        }
+    }
+    return $filtered ;
 }
 
 function require_login() {
